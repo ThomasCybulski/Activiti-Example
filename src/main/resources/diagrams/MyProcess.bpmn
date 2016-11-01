@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="myProcess" name="My process" isExecutable="true">
+    <startEvent id="startevent1" name="Start"/>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="servicetask1"/>
+    <exclusiveGateway id="exclusivegateway1" name="is my variable isCheckPositive true?"/>
+    <sequenceFlow id="flow2" sourceRef="servicetask1" targetRef="exclusivegateway1"/>
+    <endEvent id="endevent1" name="End"/>
+    <serviceTask id="servicetask1" name="Execute my Java File" activiti:class="MyJavaFile"/>
+    <userTask id="scripttask1" name="Assign kermit" activiti:assignee="kermit"/>
+    <userTask id="scripttask2" name="Assign gonzo" activiti:assignee="gonzo"/>
+    <sequenceFlow id="flow4" name="isCheckPositive==true" sourceRef="exclusivegateway1" targetRef="scripttask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isCheckPositive==true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow3" name="isCheckPositive==false" sourceRef="exclusivegateway1" targetRef="scripttask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isCheckPositive==false}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="scripttask1" targetRef="sid-A9106CE7-8052-453A-84DC-BC9962963569"/>
+    <exclusiveGateway id="sid-A9106CE7-8052-453A-84DC-BC9962963569"/>
+    <sequenceFlow id="flow5" sourceRef="scripttask2" targetRef="sid-A9106CE7-8052-453A-84DC-BC9962963569"/>
+    <sequenceFlow id="sid-3B69D891-78E4-4054-A53F-76FB06B4931F" sourceRef="sid-A9106CE7-8052-453A-84DC-BC9962963569" targetRef="endevent1"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_myProcess">
+    <bpmndi:BPMNPlane bpmnElement="myProcess" id="BPMNPlane_myProcess">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="160.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="330.0" y="158.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="28.0" width="28.0" x="690.0" y="161.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="180.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="scripttask1" id="BPMNShape_scripttask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="60.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="scripttask2" id="BPMNShape_scripttask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="260.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-A9106CE7-8052-453A-84DC-BC9962963569" id="BPMNShape_sid-A9106CE7-8052-453A-84DC-BC9962963569">
+        <omgdc:Bounds height="40.0" width="40.0" x="600.0" y="155.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-3B69D891-78E4-4054-A53F-76FB06B4931F" id="BPMNEdge_sid-3B69D891-78E4-4054-A53F-76FB06B4931F">
+        <omgdi:waypoint x="639.6144578313254" y="175.3855421686747"/>
+        <omgdi:waypoint x="690.0002509882663" y="175.0838308324056"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="129.99660595085598" y="175.31907672235863"/>
+        <omgdi:waypoint x="180.0" y="176.38297872340425"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="285.0" y="177.72340425531914"/>
+        <omgdi:waypoint x="330.08474576271186" y="177.91525423728814"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="350.0" y="158.0"/>
+        <omgdi:waypoint x="350.0" y="87.0"/>
+        <omgdi:waypoint x="420.0" y="87.28571428571429"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="350.0" y="198.0"/>
+        <omgdi:waypoint x="350.0" y="287.0"/>
+        <omgdi:waypoint x="420.0" y="287.2857142857143"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="525.0" y="287.5"/>
+        <omgdi:waypoint x="620.5" y="287.5"/>
+        <omgdi:waypoint x="620.5" y="194.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="525.0" y="87.5"/>
+        <omgdi:waypoint x="620.5" y="87.5"/>
+        <omgdi:waypoint x="620.5" y="155.5"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
